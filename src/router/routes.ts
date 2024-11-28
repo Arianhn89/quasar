@@ -1,10 +1,55 @@
-import { RouteRecordRaw } from 'vue-router';
+import { route } from 'quasar/wrappers';
+import { RouteRecordRaw, RouteRecordRedirectOption} from 'vue-router';
+import { RouteCallback } from '@quasar/app-vite';
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    component: () => import('layouts/auth/AuthLayout.vue'),
+    redirect: <RouteRecordRedirectOption> route( <RouteCallback> {name:'login'}),
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('pages/auth/LoginPage.vue')
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('pages/auth/RegisterPage.vue')
+      }
+    ],
+  },
+  {
+    path: '/dashboard',
+    component: ()=> import('layouts/dashboard/DashboardLayout.vue'),
+    children: [
+      {
+        path: 'search',
+        name:  'search',
+        component: () => import('pages/dashboard/SearchPage.vue'),
+      },
+      {
+        path: 'index',
+        name:  'index',
+        component: () => import('pages/dashboard/IndexPage.vue'),
+      },
+      {
+        path: 'myPost',
+        name:  'myPost',
+        component: () => import('pages/dashboard/MyPostPage.vue'),
+      },
+      {
+        path: 'allPost',
+        name:  'allPost',
+        component: () => import('pages/dashboard/AllPostPage.vue'),
+      },
+      {
+        path: 'allUser',
+        name:  'allUser',
+        component: () => import('pages/dashboard/AllUserPage.vue'),
+      },
+    ],
   },
 
   // Always leave this as last one,
