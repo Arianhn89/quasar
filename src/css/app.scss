@@ -1,14 +1,28 @@
 // app global css in SCSS form
-.auth-background{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-image: url(images/loginWallpaper.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
-    background-attachment: fixed;
-}
+// .auth-background{
+//     width: 100%;
+//     height: 100%;
+//     overflow: hidden;
+//     background-image: url(images/loginWallpaper.jpg);
+//     background-repeat: no-repeat;
+//     background-position: center;
+//     background-size: 100% 100%;
+//     background-attachment: fixed;
+// }
 .w-400{
     width: 400px;
+}
+.avatarBox{
+    background-image: radial-gradient(
+        rgb(245,246,240),
+        rgb(231, 156, 57),
+        rgb(181, 100, 1),
+        );
+        width: 100%;
+        height: 300px;
+        box-shadow: 0 3px 9px rgba(0,0,0,0.9);
+}
+.my-card{
+    max-width: 290px;
+    width: 100%;
 }

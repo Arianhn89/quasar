@@ -18,6 +18,7 @@ function menu() {
         {name:'My Post', route:'myPost', icon:mdiNote},
         {name:'All Post', route:'allPost', icon:mdiNoteMultiple},
         {name:'All User', route:'allUser', icon:mdiAccountGroup},
+        
 ] as menuItem[];
 }
 
