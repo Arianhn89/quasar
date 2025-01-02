@@ -4,12 +4,13 @@
       :grid="$q.screen.xs"
       flat
       bordered
-      title="Treats"
+      title="My Post"
       :rows="rows"
       :columns="columns"
       row-key="name"
       :filter="filter"
-      hide-header
+      :row-per-page-options="[pagination.rowPerPage]"
+      v-model:pagination="pagination"
     >
       <template v-slot:top-right>
         <q-input
@@ -23,6 +24,42 @@
             <q-icon name="search" />
           </template>
         </q-input>
+        <q-btn
+        label="Crate New Post"
+        color="orange"
+        class="q-ml-md"
+        />
+      </template>
+      <template v-slot:header="props">
+        <q-tr :props="props">
+          <q-th v-for="col in props.cols" :key="col.name" :props="props">
+            {{ col.label }}
+          </q-th>
+          <q-th auto-width>Tools</q-th>
+        </q-tr>
+      </template>
+      <template v-slot:body="props">
+        <q-tr :props="props" class="q-ml-md">
+          <q-td v-for="col in props.cols" :key="col.name" :props="props">
+            {{ col.value }}
+          </q-td>
+          <q-td auto-width>
+            <q-btn
+            class="q-ma-sm"
+            color="warning"
+            size="md"
+            dense
+            icon="update"
+            />
+            <q-btn
+            class="q-ma-sm" 
+            color="red"
+            size="md"
+            dense
+            icon="delete"
+            />
+          </q-td>
+        </q-tr>
       </template>
     </q-table>
   </div>
@@ -31,4 +68,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { columns, rows, pagination } from 'components/ts/MyPostComponent';
+
+const filter = ref('')
+
 </script>
