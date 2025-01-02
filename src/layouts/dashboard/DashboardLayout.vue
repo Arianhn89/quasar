@@ -26,7 +26,7 @@
         <q-item
           v-for="(item, index) in accessMenu"
           :key="index"
-          :to="item.route"
+          :to="{name:item.route}"
           v-ripple
           clickable
         >
