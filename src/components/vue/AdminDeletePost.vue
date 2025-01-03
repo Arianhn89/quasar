@@ -1,16 +1,25 @@
 <script lang="ts" setup>
-import {defineProps, defineEmits, ref} from 'vue'
+import {defineProps, defineEmits, watch ,ref} from 'vue'
 
 const props = defineProps({
     modal:{
         default : false
-    }
+    },
+    date: {},
 })
-const createPostParameter = ref({
+const updatePostParameter = ref({
     title : '',
     description: '',
     image:undefined,
 })
+
+watch(props, ()=>{
+    updatePostParameter.value = {
+        title: props.date.title,
+        description: props.date.description,
+        image: updatePostParameter.value.image,
+    }
+});
 
 const emit = defineEmits(['update:modal'])
 
@@ -20,9 +29,9 @@ const close = ()=>{
 
 const accepted = () => {
     console.log(
-        createPostParameter.value.title,
-        createPostParameter.value.description,
-        createPostParameter.value.image,
+        updatePostParameter.value.title,
+        updatePostParameter.value.description,
+        updatePostParameter.value.image,
     );
     emit.call(this, 'update:modal', false)
 }
@@ -39,7 +48,7 @@ const accepted = () => {
             <q-card-section class="q-pt-none">
               <q-input
                 dense
-                v-model:model-value = "createPostParameter.title"
+                v-model:model-value = "updatePostParameter.title"
                 label="Enter Your Title"
               />
             </q-card-section>
@@ -48,14 +57,14 @@ const accepted = () => {
               <q-input
                 type="textarea"
                 dense
-                v-model:model-value = "createPostParameter.description"
+                v-model:model-value = "updatePostParameter.description"
                 label="Enter Your Description"
               />
             </q-card-section>
 
             <q-card-section class="q-pt-none">
               <q-file
-                  v-model:model-value="createPostParameter.image"
+                  v-model:model-value="updatePostParameter.image"
                   square
                   filled
                   bottom-slots
@@ -68,7 +77,7 @@ const accepted = () => {
                   <template v-slot:append>
                     <q-icon
                       name="close"
-                      @click.stop.prevent="createPostParameter.image = null"
+                      @click.stop.prevent="updatePostParameter.image = null"
                       class="cursor-pointer"
                     />
                   </template>
